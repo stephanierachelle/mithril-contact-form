@@ -2,6 +2,11 @@
 
 const m = require("mithril");
 
+var div = document.getElementById("yourDivElement");
+const textarea = document.createElement("textarea");
+input.maxLength = "5000";
+
+
 import UIButton from "./ui/UIButton.jsx";
 
 
@@ -51,11 +56,13 @@ const EntryForm = {
         {`Email Address*`}
       </label>
       <input id="email" type="text" name="email" />
+     
       <label for="message">
         {`Message*`}
       </label>
-      <input id="input-message" type="text" name="input-message"rows="4" required />
-
+      <textarea id="input-message" type="text" name="input-message"rows="4" required />
+   <textarea maxlength="5000" cols="80" rows="40"></textarea>
+      
         <UIButton action={() => entryFormHandler(vnode.dom)} buttonName="SEND" />
         </form>
     )

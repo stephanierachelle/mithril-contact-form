@@ -1,25 +1,24 @@
 // src/components/layout/App.jsx
 
 const m = require("mithril");
-import MainStage from "./MainStage.jsx";
 
-import EntryForm from "../../components/EntryForm.jsx";
+import MainStage from "./MainStage.jsx";
+import NavBar from "./NavBar.jsx";
+
+
 // Components
 import StageBanner from "../../components/ui/StageBanner.jsx";
-import CardContainer from "../../components/layout/CardContainer.jsx";
+import MainContainer from "./MainContainer.jsx";
 
-const HomeView = home => (
-    <App>
+//form submition
+import EntryForm from "../../components/EntryForm.jsx";
+const HomeView = main => (
+    
       <StageBanner
         action={() => console.log(`Logging out!`)}
         title="Conferences"
-      />
-      <CardContainer>
-        {home.map(home => (
-          <ConferenceCard home={home} />
-        ))}
-      </CardContainer>
-    </App>
+      />,
+      <MainContainer />
   );
 
 const FormView = () => [
@@ -27,7 +26,9 @@ const FormView = () => [
     action={() => console.log(`Sending...`)}
     title="Send Message"
   />,
-  <CardContainer />
+  <MainContainer>
+  <EntryForm />
+  </MainContainer>
 ];
 
 const App = {
@@ -36,16 +37,17 @@ const App = {
 
     m.route(mainStage, "/home", {
         "/home": {
-          view: () => HomeView()
+          view: () => FormView()
         },
         "/entry": {
-          view: () => FormView()
+          view: () => HomeView()
         }
       });
     },
   view: ({ children }) => (
     <div class="App">
       <MainStage>{children}</MainStage>
+      <NavBar />
     </div>
   )
 };

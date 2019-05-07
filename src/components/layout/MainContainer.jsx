@@ -1,12 +1,12 @@
 const m = require("mithril");
 
-const CardContainer = {
+const MainContainer = {
     view: ({ children }) => {
-        return <div class="card-container">{children}</div>;
+        return <div class="main-container">{children}</div>;
     }
 };
 
-export default CardContainer;
+export default MainContainer;
 
 //component that we will wrap in a flexbox
 // control overflow through vertical scrolling 

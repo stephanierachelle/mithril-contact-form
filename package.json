@@ -1,30 +1,20 @@
 {
-    "name": "mithril-contact-form",
-    "version": "1.0.0",
-    "main": "index.js",
-    "license": "MIT",
-    "devDependencies": {
-      "babel-cli": "^6.26.0",
-      "babel-plugin-transform-react-jsx": "^6.24.1",
-      "babel-preset-es2015": "^6.24.1",
-      "babel-preset-stage-1": "^6.24.1",
-      "babel-core": "^6.26.0",
-      "babel-loader": "^7.1.3",
-      "clean-webpack-plugin": "^0.1.18",
-      "css-loader": "^0.28.10",
-      "file-loader": "^1.1.10",
-      "html-webpack-plugin": "^3.0.4",
-      "style-loader": "^0.20.2",
-      "webpack": "^4.0.1",
-      "webpack-cli": "^3.1.1",
-      "webpack-dev-server": "^3.1.0"
-    },
-    "dependencies": {
-      "auth0-js": "^9.3.1",
-      "mithril": "^1.1.6"
-    },
-    "scripts": {
-      "start": "webpack-dev-server --open",
-      "build": "webpack --config webpack.config.js"
-    }
-  }
+  "name": "starter-kit",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-preset-latest": "^6.24.1",
+    "dotenv": "4.0.0",
+    "jsonwebtoken": "^8.3.0",
+    "mocha": "^6.0.2",
+    "should": "^11.2.0",
+    "supertest": "^3.0.0"
+  },
+  "scripts": {
+    "test_rest": "mocha --no-timeouts --require babel-core/register ./tests/rest/",
+    "test_db": "node tests/bin/test_db.js",
+    "test": "npm run test_db && npm run test_rest"
+  },
+  "author": "ruslan.talpa@subzero.cloud",
+  "license": "ISC"
+}

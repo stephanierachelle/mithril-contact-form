@@ -1,0 +1,5 @@
+%syntax-version=1.0.0
+%project=app
+
+0000000001-initial 2019-05-12T07:23:24Z root <root@linuxkit-025000000001> # Add 0000000001-initial migration
+0000000002-data 2019-05-12T07:24:09Z root <root@linuxkit-025000000001> # initial dataset

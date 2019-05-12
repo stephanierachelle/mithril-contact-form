@@ -12,7 +12,7 @@ import MainContainer from "./MainContainer.jsx";
 
 //form submition
 import EntryForm from "../../components/EntryForm.jsx";
-const HomeView = () => (
+const HomeView = main => (
     
       <StageBanner
         action={() => console.log(`Logging out!`)}

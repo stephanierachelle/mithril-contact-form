@@ -1,10 +1,7 @@
 // src/components/EntryForm.jsx
 
-<<<<<<< HEAD
 const m = require('mithril')
-=======
-const m = require("mithril");
->>>>>>> parent of 1359aa7... input message - error- need to fix
+
 
 import UIButton from "./ui/UIButton.jsx";
 
@@ -36,42 +33,29 @@ const entryFormHandler = entryForm => {
   entryForm.reset();
 };
 
-const EntryForm = {
-  data: {
-    input: false
-  }
-  // view: (vnode) => {...}
-};
-
 // Public view
 const EntryForm = {
-     data: {        //State of EntryForm component 
+     data: {        //State of EntryForm component
+        CFP: false
     },
     view: vnode => (
         <form name="contact-form" id="contact-form">
         {/* ... */}
       <label for="first-name">
-        {`First Name`}</label>
+        {`First Name*`}</label>
       <input id="first-name" type="text" name="name" />
-
       <label for="last-name">
-        {`Last Name`}</label>
-      <input id="last-name" type="text" name="name" />
+        {`Last Name*`}</label>
+      <input id="full-name" type="text" name="name" />
 
       <label for="email">
-        {`Your email`}
+        {`Email Address*`}
       </label>
       <input id="email" type="text" name="email" />
       <label for="message">
-        {`Your Message`}
+        {`Message*`}
       </label>
-<<<<<<< HEAD
       <input id="input-message" type="text" name="input-message" />
-      
-=======
-      <input id="input-message" type="text" name="input-message"rows="4" required />
-
->>>>>>> parent of 1359aa7... input message - error- need to fix
         <UIButton action={() => entryFormHandler(vnode.dom)} buttonName="SEND" />
         </form>
     )

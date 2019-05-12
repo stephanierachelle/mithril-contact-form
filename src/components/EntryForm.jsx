@@ -32,7 +32,14 @@ const entryFormHandler = entryForm => {
   entryForm.reset();
 };
 
+const EntryForm = {
+  data: {
+    input: false
+  }
+  // view: (vnode) => {...}
+};
 
+// Public view
 const EntryForm = {
      data: {        //State of EntryForm component 
     },

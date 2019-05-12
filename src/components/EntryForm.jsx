@@ -1,6 +1,10 @@
 // src/components/EntryForm.jsx
 
+<<<<<<< HEAD
 const m = require('mithril')
+=======
+const m = require("mithril");
+>>>>>>> parent of 1359aa7... input message - error- need to fix
 
 import UIButton from "./ui/UIButton.jsx";
 
@@ -58,12 +62,16 @@ const EntryForm = {
         {`Your email`}
       </label>
       <input id="email" type="text" name="email" />
-     
       <label for="message">
         {`Your Message`}
       </label>
+<<<<<<< HEAD
       <input id="input-message" type="text" name="input-message" />
       
+=======
+      <input id="input-message" type="text" name="input-message"rows="4" required />
+
+>>>>>>> parent of 1359aa7... input message - error- need to fix
         <UIButton action={() => entryFormHandler(vnode.dom)} buttonName="SEND" />
         </form>
     )

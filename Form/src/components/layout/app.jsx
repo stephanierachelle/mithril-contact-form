@@ -1,24 +1,24 @@
 // src/components/layout/App.jsx
 
 const m = require("mithril");
+const validate = require("validate.js");
 
 import MainStage from "./MainStage.jsx";
 import NavBar from "./NavBar.jsx";
 
-
 // Components
 import StageBanner from "../../components/ui/StageBanner.jsx";
-import MainContainer from "./MainContainer.jsx";
+import MainContainer from "../../components/layout/MainContainer.jsx";
 
 //form submition
-import EntryForm from "../../components/EntryForm.jsx";
-const HomeView = main => (
+import ContactForm from "../../components/ContactForm.jsx";
+
+const ConferenceView = conferences => (
     
       <StageBanner
         action={() => console.log(`Logging out!`)}
         title="Conferences"
-      />,
-      <MainContainer />
+      />
   );
 
 const FormView = () => [
@@ -27,7 +27,7 @@ const FormView = () => [
     title="Send Message"
   />,
   <MainContainer>
-  <EntryForm />
+  <ContactForm />
   </MainContainer>
 ];
 
@@ -40,10 +40,11 @@ const App = {
           view: () => FormView()
         },
         "/entry": {
-          view: () => HomeView()
+        view: () => ConferenceView()
         }
       });
     },
+
   view: ({ children }) => (
     <div class="App">
       <MainStage>{children}</MainStage>

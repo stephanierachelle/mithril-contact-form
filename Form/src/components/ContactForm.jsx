@@ -1,4 +1,4 @@
-// src/components/EntryForm.jsx
+// src/components/ContactForm.jsx
 
 const m = require('mithril')
 
@@ -6,8 +6,8 @@ const m = require('mithril')
 import UIButton from "./ui/UIButton.jsx";
 
 
-const entryFormHandler = entryForm => {
-  const formData = new FormData(entryForm);
+const contactFormHandler = contactForm => {
+  const formData = new FormData(contactForm);
   const newEntry = {};
 
   Array.from(formData.entries()).map(entryValue => {
@@ -30,20 +30,21 @@ const entryFormHandler = entryForm => {
     console.log(newEntry);
 
 
-  entryForm.reset();
+  contactForm.reset();
 };
 
 // Public view
-const EntryForm = {
-     data: {        //State of EntryForm component
+const ContactForm = {
+     data: {        //State of ContactForm component
         CFP: false
     },
     view: vnode => (
-        <form name="contact-form" id="contact-form">
+        <form id="contact-form" name="contact-form" method="POST" action="/contact"  >
         {/* ... */}
       <label for="first-name">
         {`First Name*`}</label>
       <input id="first-name" type="text" name="name" />
+
       <label for="last-name">
         {`Last Name*`}</label>
       <input id="full-name" type="text" name="name" />
@@ -56,9 +57,10 @@ const EntryForm = {
         {`Message*`}
       </label>
       <input id="input-message" type="text" name="input-message" />
-        <UIButton action={() => entryFormHandler(vnode.dom)} buttonName="SEND" />
+        <UIButton action={() => contactFormHandler(vnode.dom)} buttonName="SEND" />
         </form>
     )
+
 };
 
-export default EntryForm;
+export default ContactForm;

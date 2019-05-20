@@ -2,7 +2,6 @@
 
 BEGIN;
 
-SET search_path = settings, pg_catalog;
-TRUNCATE secrets;
+DROP TABLE Contact_Form_Queries;
 
 COMMIT;

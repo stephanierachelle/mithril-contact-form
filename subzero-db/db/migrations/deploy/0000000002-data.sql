@@ -2,15 +2,13 @@
 
 BEGIN;
 
-SET search_path = settings, pg_catalog, public;
-
-COPY secrets (key, value) FROM stdin;
-jwt_lifetime    3600
-auth.default-role   webuser
-auth.data-schema    data
-auth.api-schema api
-\.
-
-INSERT INTO secrets (key, value) VALUES ('jwt_secret', gen_random_uuid());
+CREATE TABLE Contact_Form_Queries (
+    PersonID INT,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Email VARCHAR(50),
+    MessageInput VARCHAR(500),
+    Timestamp TIMESTAMPTZ NOT NULL DEFAULT NOW()
+)
 
 COMMIT;

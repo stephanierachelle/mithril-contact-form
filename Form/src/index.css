@@ -25,7 +25,13 @@ html {
     height: 100%;
     width: 100%;
 }
-
+.nav-bar {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #EE5F28;
+}
 
 .main-stage {
     flex: 10;
@@ -33,6 +39,12 @@ html {
     flex-direction: column;
     padding: 8em;
     background: #f3f1f1;
+}
+
+.nav-button {
+    color: white;
+    font-size: 150%;
+    cursor: pointer;
 }
 
 .stage-banner {

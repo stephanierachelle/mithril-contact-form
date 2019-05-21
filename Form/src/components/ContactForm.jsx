@@ -2,7 +2,6 @@
 
 const m = require('mithril')
 
-
 import UIButton from "./ui/UIButton.jsx";
 
 
@@ -41,22 +40,22 @@ const ContactForm = {
     view: vnode => (
         <form id="contact-form" name="contact-form" method="POST" action="/contact"  >
         {/* ... */}
-      <label for="first-name">
-        {`First Name*`}</label>
+      <label for="fname">
+        {`First Name`}</label>
       <input id="first-name" type="text" name="name" />
 
-      <label for="last-name">
-        {`Last Name*`}</label>
+      <label for="lname">
+        {`Last Name`}</label>
       <input id="full-name" type="text" name="name" />
 
       <label for="email">
-        {`Email Address*`}
+        {`Email Address`}
       </label>
       <input id="email" type="text" name="email" />
       <label for="message">
-        {`Message*`}
+        {`Message`}
       </label>
-      <input id="input-message" type="text" name="input-message" />
+      <input id="input-message" type="text" name="message" />
         <UIButton action={() => contactFormHandler(vnode.dom)} buttonName="SEND" />
         </form>
     )

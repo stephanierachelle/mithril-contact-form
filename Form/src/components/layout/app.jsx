@@ -1,10 +1,12 @@
 // src/components/layout/App.jsx
 
 const m = require("mithril");
-const validate = require("validate.js");
+const entryToForm = EntryForm();
+
+// UI
+import UIButton from "../../components/ui/UIButton.jsx";
 
 import MainStage from "./MainStage.jsx";
-import NavBar from "./NavBar.jsx";
 
 // Components
 import StageBanner from "../../components/ui/StageBanner.jsx";
@@ -13,20 +15,20 @@ import MainContainer from "../../components/layout/MainContainer.jsx";
 //form submition
 import ContactForm from "../../components/ContactForm.jsx";
 
-const ConferenceView = conferences => (
-    
-      <StageBanner
-        action={() => console.log(`Logging out!`)}
-        title="Conferences"
-      />
-  );
+const WelcomeView = () => [
+  <h1 class="app-title">Conference Tracker</h1>,
+  <h2 class="app-greeting">Welcome</h2>,
+  <span class="app-description">Track conferences and CFP dates.</span>,
+  <div class="login-button">
+  <UIButton action={() => } buttonName="LOGIN" />
+  </div>
 
 const FormView = () => [
   <StageBanner
     action={() => console.log(`Sending...`)}
     title="Send Message"
   />,
-  <MainContainer>
+  <MainContainer>,
   <ContactForm />
   </MainContainer>
 ];
@@ -35,12 +37,12 @@ const App = {
     oncreate: vnode => {
       const mainStage = vnode.dom.querySelector(".main-stage");
 
-    m.route(mainStage, "/home", {
-        "/home": {
-          view: () => FormView()
+    m.route(mainStage, "/", {
+        "/": {
+          view: () => ConferenceView()
         },
-        "/entry": {
-        view: () => ConferenceView()
+        "/contact": {
+        view: () => FormView()
         }
       });
     },
@@ -48,7 +50,6 @@ const App = {
   view: ({ children }) => (
     <div class="App">
       <MainStage>{children}</MainStage>
-      <NavBar />
     </div>
   )
 };

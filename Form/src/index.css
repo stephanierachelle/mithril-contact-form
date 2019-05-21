@@ -17,6 +17,7 @@ html {
     width: 100%;
     background: #f3f1f1;
     font-family: 'Montserrat ', Helvetica;
+    text-align: center;
 }
 
 .App {
@@ -25,7 +26,7 @@ html {
     height: 100%;
     width: 100%;
 }
-.nav-bar {
+.nav-container {
     flex: 1;
     display: flex;
     justify-content: space-around;
@@ -45,6 +46,7 @@ html {
     color: white;
     font-size: 150%;
     cursor: pointer;
+    
 }
 
 .stage-banner {

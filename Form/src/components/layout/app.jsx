@@ -1,7 +1,6 @@
 // src/components/layout/App.jsx
 
 const m = require("mithril");
-const entryToForm = EntryForm();
 
 // UI
 import UIButton from "../../components/ui/UIButton.jsx";
@@ -14,23 +13,28 @@ import MainContainer from "../../components/layout/MainContainer.jsx";
 
 //form submition
 import ContactForm from "../../components/ContactForm.jsx";
+import NavButton from "../ui/NavButton.jsx";
 
 const WelcomeView = () => [
-  <h1 class="app-title">Conference Tracker</h1>,
-  <h2 class="app-greeting">Welcome</h2>,
-  <span class="app-description">Track conferences and CFP dates.</span>,
-  <div class="login-button">
-  <UIButton action={() => } buttonName="LOGIN" />
-  </div>
+  <h1 class="app-title">Capitalviz</h1>,
+  <h2 class="app-greeting">Welcome to our mithril website</h2>,
+  <span class="app-description">Say hey, we won't bite.</span>,
+  <NavButton  
+  action={() => console.log(`clicked!`)}
+  buttonName="GET IN TOUCH"
+  />,
+  
+  ];
 
 const FormView = () => [
   <StageBanner
     action={() => console.log(`Sending...`)}
     title="Send Message"
   />,
-  <MainContainer>,
+  <MainContainer>
   <ContactForm />
   </MainContainer>
+ 
 ];
 
 const App = {
@@ -39,7 +43,7 @@ const App = {
 
     m.route(mainStage, "/", {
         "/": {
-          view: () => ConferenceView()
+          view: () => WelcomeView()
         },
         "/contact": {
         view: () => FormView()

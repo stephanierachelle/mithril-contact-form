@@ -3,13 +3,15 @@ var express = require('express');
 var app = express();
 
 app.set('view engine', 'ejs');
+app.use('/public', express.static('stuff'));
 
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/server.html');
+    res.render('index');
 });
 
 app.get('/contact', function(req, res){
-    res.sendFile(__dirname + '/contact.html');
+    
+    res.render('contact', {qs: req.query});
 });
 
 app.get('/profile/:name', function(req, res){

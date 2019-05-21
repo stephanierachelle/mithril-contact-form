@@ -6,12 +6,6 @@ const m = require("mithril");
 //UI
 import ContactForm from "../../components/ui/Validation.jsx";
 
-const constraints = {
-    from: {
-        email: true
-        message: "Email not valid."
-    }
-};
 
 validate({from: null}, constraints);
 
@@ -31,7 +25,7 @@ validate({from: "nicklas@foo.faketld"}, constraints);
 validate({from: "NICKLAS@ANSMAN.SE"}, constraints);
 // => undefined
 
-constraints = {
+var constraints = {
   from: {
     email: {
       message: "doesn't look like a valid email"

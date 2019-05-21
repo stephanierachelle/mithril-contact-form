@@ -75,7 +75,7 @@ html {
 }
 
 .main-container {
-    display: flex;
+    display: block;
     flex-direction: column;
     overflow-y: scroll;
 }

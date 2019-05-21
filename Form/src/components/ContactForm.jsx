@@ -35,7 +35,7 @@ const contactFormHandler = contactForm => {
 // Public view
 const ContactForm = {
      data: {        //State of ContactForm component
-        CFP: false
+        validation: false
     },
     view: vnode => (
         <form id="contact-form" name="contact-form" method="POST" action="/contact"  >

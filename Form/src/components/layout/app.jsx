@@ -2,8 +2,7 @@
 
 const m = require("mithril");
 
-// UI
-import UIButton from "../../components/ui/UIButton.jsx";
+
 
 import MainStage from "./MainStage.jsx";
 
@@ -36,6 +35,7 @@ const FormView = () => [
   </MainContainer>
  
 ];
+
 
 const App = {
     oncreate: vnode => {

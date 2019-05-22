@@ -6,36 +6,94 @@ const m = require("mithril");
 //UI
 import ContactForm from "../../components/ui/Validation.jsx";
 
+//validation
 
-validate({from: null}, constraints);
 
-// => undefined
+const emailRegex = RegExp(/^[a-zA-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
 
-validate({from: ""}, constraints);
-// => {"email": ["From is not a valid email"]}
+const formValid = formErrors => {
+  let valid = true;
 
-validate({from: "nicklas@ansman"}, constraints);
-// => {"email": ["From is not a valid email"]}
+  Object.values(formErrors).forEach( val => {
+    val.length > 0 && (valid = false);
+  });
+    
+  return valid;
+};
 
-// Any TLD is allowed
-validate({from: "nicklas@foo.faketld"}, constraints);
-// => undefined
-
-// Upper cased emails are allowed
-validate({from: "NICKLAS@ANSMAN.SE"}, constraints);
-// => undefined
-
-var constraints = {
-  from: {
-    email: {
-      message: "doesn't look like a valid email"
+ const validation = formEl => {
+    this.state = {
+      fname: null,
+      lname: null,
+      email: null,
+      message: null,
+      formErrors: {
+        fname: "",
+        lname: "",
+        email: "",
+        message: "",
     }
   }
 };
 
-validate({from: "foobar"}, constraints);
-// => {"email": ["From doesn't look like a valid email"]}
+handleSubmit = e => { //event bubble
+e.preventDefault();
 
-// It allows unicode
-validate({from: "first.läst@example.com"}, constraints);
-// => undefined
+if(formValid(this.state.formErrors)){
+  console.log(`--submiting
+  First Name: ${this.state.fname}
+  Last Name: ${this.state.lname}
+  Email: ${this.state.email}
+  Message: ${this.state.message}`
+  );
+} else {
+  console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
+  }
+}
+
+
+
+handleChange = e => {
+  e.preventDefault();
+  const { name, value } = e.target;
+  let formErrors = {...this.state.formErrors};
+  switch (name) {
+    case 'fname':
+      formErrors.fname = value.length < 3 && value.length > 0 ? 'minimum 3 characters required' : "";
+      break;
+    case 'lname':
+      formErrors.lname = value.length < 3 && value.length > 0 ? 'minimum 3 characters required' : "";
+      break;
+      case 'email':
+      formErrors.email = emailRegex.test(value)
+      ? ""
+      : 'Invalid email'
+      break;
+    case 'message':
+      formErrors.message = value.length < 3 && value.length > 0 ? 'minimum 15 characters required' : "";
+      break;
+      default:
+      break;
+  }
+
+  this.setState({ formErrors, [name]: value }, () => console.log(this.state))
+};
+
+
+
+
+//validation finish
+
+
+function ContactForm () {
+  const input = {
+    validation: {
+      value: false,
+      error: '',
+      validate() {
+        .validation.error =
+          input.validation.value().length < 10 ?
+            'Expected at least 10 characters' : ''
+      }
+    }
+  }

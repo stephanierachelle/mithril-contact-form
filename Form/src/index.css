@@ -26,13 +26,25 @@ html {
     height: 100%;
     width: 100%;
 }
-.nav-container {
-    flex: 1;
+.wrapper {
+    height: 100vh;
+    width: 100%;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    background: #EE5F28;
-}
+    background-color: #f3f1f1;
+  }
+.form-wrapper {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px #555;
+    background-color: #ffffff;
+  }
+
 
 .main-stage {
     flex: 10;
@@ -54,14 +66,6 @@ html {
     margin: 0.5em;
 }
 
-.stage-banner svg {
-    position: absolute;
-    color: #EE5F28;
-    right: 0;
-    top: 47%;
-    transform: translateY(-50%);
-    font-size: 120%;
-}
 
 .stage-title {
     text-align: center;
@@ -113,4 +117,13 @@ html {
     margin: 0 0 0.5em 0;
     padding: 0.75em;
     font-size: 16px;
+    border-radius: 2px;
+    outline: none;
+    border: 1px solid #cfcfcf;
 }
+
+.errorMessage {
+    color: red;
+    font-size: 0.75em;
+    display: relative;
+  }

@@ -1,17 +1,27 @@
 // src/components/ContactForm.jsx
 
 const m = require('mithril');
+
+
 import UIButton from "./ui/UIButton.jsx";
 
 
-var ContactForm = {
-  firstName: "",
-  lastName: "",
+
+var contactForm = {
+  firstName: {
+    value: '',
+    error: '',
+    validate() {
+      contactForm.firstName.error =
+        contactForm.firstName.value().length < 3 ?
+          'Expected at least 3 characters' : '';
+    }
+  },
+ 
   email: "",
   message: "",
-  setFirstName: function(value) {
-      this.firstName = value
-  },
+
+
   setLastName: function(value) {
       this.lastName = value
   },
@@ -63,4 +73,5 @@ setMessage: function(value) {
 
 
 
-export default ContactForm;
+
+export default contactForm;

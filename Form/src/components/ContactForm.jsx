@@ -3,37 +3,60 @@
 const m = require('mithril');
 import UIButton from "./ui/UIButton.jsx";
 
+
 var ContactForm = {
   firstName: "",
   lastName: "",
   email: "",
   message: "",
-  setUsername: function(value) {
+  setFirstName: function(value) {
       this.firstName = value
   },
-  setPassword: function(value) {
+  setLastName: function(value) {
       this.lastName = value
   },
-  canSubmit: function() {
-      return this.username !== "" && this.password !== ""
+  setEmail: function(value) {
+    this.email = value
+},
+setMessage: function(value) {
+  this.message = value
+},
+  canSubmitIf: function() {
+      return this.firstName !== "" && this.lastName !== ""
   },
-  login: function() {/*...*/},
+  OnSubmit: function() {/*...*/},
+
   view: function() {
       return m(".wrapper", 
       m(".form-wrapper",
       [
+        m('.stage-title', "Contact Us"),
+        m('h4', "Got a question? We'd love to hear from you. Send us a message and we'll respond as soon as possible."),
+        m('p', "First Name"),
           m("input[type=text]", {
-              oninput: function (e) { this.setUsername(e.target.value) },
+              oninput: function (e) { this.setFirstName(e.target.value) },
               value: this.firstName,
           }),
+
+          m('p', "Last Name"),
           m("input[type=text]", {
-              oninput: function (e) { this.setPassword(e.target.value) },
+              oninput: function (e) { this.setLastName(e.target.value) },
               value: this.lastName,
           }),
-          <UIButton action={() => console.log(`Saving...`)} buttonName="SEND" />
+
+          m('p', "Email Address"),
+          m("input[type=text]", {
+              oninput: function (e) { this.setEmail(e.target.value) },
+              value: this.email,
+          }),
+
+          m('p', "Message"),
+          m('textarea.fullWidth', {
+              oninput: function (e) { this.setMessage(e.target.value) },
+              value: this.message,
+          }),
+          <UIButton action={() => canSubmitIf(vnode.dom)} buttonName="Send Message" />
         ]) 
-        console.log("hi")
-      
     )
   }
 }

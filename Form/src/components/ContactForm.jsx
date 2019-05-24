@@ -32,6 +32,7 @@ var ContactForm = {
           }),
           <UIButton action={() => console.log(`Saving...`)} buttonName="SEND" />
         ]) 
+        console.log("hi")
       
     )
   }

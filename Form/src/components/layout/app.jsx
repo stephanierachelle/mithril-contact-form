@@ -7,7 +7,6 @@ const m = require("mithril");
 import MainStage from "./MainStage.jsx";
 
 // Components
-import StageBanner from "../../components/ui/StageBanner.jsx";
 import MainContainer from "../../components/layout/MainContainer.jsx";
 
 //form submition
@@ -26,15 +25,13 @@ const WelcomeView = () => [
   ];
 
 const FormView = () => [
-  <StageBanner
-    action={() => console.log(`Sending...`)}
-    title="Send Message"
-  />,
+
   <MainContainer>
   <ContactForm />
   </MainContainer>
  
 ];
+
 
 
 const App = {

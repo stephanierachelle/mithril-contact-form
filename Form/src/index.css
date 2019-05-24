@@ -104,10 +104,6 @@ html {
     color:  rgb(40, 103, 238);
 }
 
-.input-message{
-    width: 25%;
-}
-
 #contact-form label {
     padding: 1em 0;
 
@@ -127,3 +123,22 @@ html {
     font-size: 0.75em;
     display: relative;
   }
+
+  
+  .message {
+      height: 60px
+  }
+
+  .button {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  margin: 1em 0;
+  padding: 1em;
+  width: 50%;
+  background: rgb(0, 0, 0);
+  color:  rgb(255, 255, 255);
+  left: 0;
+  right: 0;
+  border-radius: 28px;
+}

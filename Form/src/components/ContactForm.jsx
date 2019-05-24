@@ -34,7 +34,7 @@ setMessage: function(value) {
   canSubmitIf: function() {
       return this.firstName !== "" && this.lastName !== ""
   },
-  OnSubmit: function() {/*...*/},
+ 
 
   view: function() {
       return m(".wrapper", 
@@ -59,13 +59,29 @@ setMessage: function(value) {
               oninput: function (e) { this.setEmail(e.target.value) },
               value: this.email,
           }),
+          
 
           m('p', "Message"),
           m('textarea.fullWidth', {
               oninput: function (e) { this.setMessage(e.target.value) },
               value: this.message,
           }),
-          <UIButton action={() => canSubmitIf(vnode.dom)} buttonName="Send Message" />
+
+           
+        onchange: function(event){
+          this.event.firstName = true;
+      }}
+        />
+        {this.event.firstName
+          ? [
+              m('error-message', "*First name must contain at least 3 characters")
+             
+            ]
+          : null}
+
+          <UIButton 
+        action={() => contactFormHandler(vnode.dom)} 
+        buttonName="Send Message" />
         ]) 
     )
   }

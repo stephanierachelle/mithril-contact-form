@@ -1,91 +1,88 @@
 // src/components/ContactForm.jsx
 
 const m = require('mithril');
+const stream = require("mithril/stream")
 
 
-import UIButton from "./ui/UIButton.jsx";
 
-const contactFormHandler = formDOM => {
-  const formData = new FormData(formDOM);
-  const newEntry = {};
-
-
-  Array.from(formData.entries()).map(entryValue => {
-    const key = entryValue[0];
-    const value = entryValue[1];
-
-    switch (value) {
-      case "false":
-        newEntry[key] = false;
-        break;
-      case "true":
-        newEntry[key] = true;
-        break;
-      default:
-        newEntry[key] = value;
-        break;
+function formModel() {
+  const emailRegex = RegExp(
+    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+  )
+  const model = {
+    firstName: {
+      value: stream(''),
+      error: '',
+      validate() {
+        model.firstName.error =
+          model.firstName.value().length < 3 ?
+            'Expected at least 3 characters' : '';
+      }
+    },
+    lastName: {
+      value: stream(''),
+      error: '',
+      validate() {
+        model.lastName.error =
+          model.lastName.value().length < 3 ?
+            'Expected no more than 3 characters' : '';
+      }
+    },
+    email: {
+      value: stream(''),
+      error: '',
+      validate() {
+        model.email.error =
+        emailRegex.email.value("").length < 3 ? 
+        '' : 'Invalid email';
+        
+      }
+      
     }
-  });
-  
-  console.log(newEntry);
+  };
+  return model;
+}
 
+function validateAll(model) {
+  Object.keys(model).forEach((field) =>
+    model[field].validate());
+}
 
-
+const ValidatedInput = {
+  view({ attrs }) {
+    return [
+      m('input[type=text]', {
+        className: attrs.field.error ? 'error' : '',
+        value: attrs.field.value(),
+        oninput: m.withAttr('value', attrs.field.value)
+      }),
+      m('p.errorMessage', attrs.field.error)
+    ];
+  }
 };
 
-
-const ContactForm = {
-  firstName:false,
-  lastName:"",
-  email: "",
-  message: "", 
- 
-
-  setFirstName: function(value) {
-    this.firstName = value
-    console.log('it grabs value')
-  },
-  
-  view: (vnode) => {
-      return m(".wrapper", 
-      m(".form-wrapper",
-      [
-        m('.stage-title', "Contact Us"),
-        m('h4', "Got a question? We'd love to hear from you. Send us a message and we'll respond as soon as possible."),
-        m('p', "First Name"),
-          m("input[type=text]",
-          {
-            
-            oninput: (e)=> { this.setFirstName(e.target.value) },
-            value: this.firstName,
-          }),
-
-
-          m('p', "Last Name"),
-          m("input[type=text]", {
-            oninput: (e)=> { this.setLastName(e.target.value) },
-              value: this.lastName,
-          }),
-
-          m('p', "Email Address"),
-          m("input[type=text]", {
-            oninput: (e)=> { this.setEmail(e.target.value) },
-              value: this.email,
-          }),
-          
-
-          m('p', "Message"),
-          m('textarea.fullWidth', {
-            oninput: (e)=> { this.setMessage(e.target.value) },
-              value: this.message,
-          }),
-
-        < UIButton 
-        action={() => contactFormHandler(vnode.dom)} 
-        buttonName="Send Message" ></UIButton>
-        ]) 
-    )
-  }
+function ContactForm() {
+  const model = formModel();
+  return {
+    view() {
+      return (
+        m('form', {
+          onsubmit(event) {
+            event.preventDefault();
+            validateAll(model);
+          }
+        },
+          m('p', 'First Name'),
+          m(ValidatedInput, { field: model.firstName }),
+          m('p', 'Last Name'),
+          m(ValidatedInput, { field: model.lastName }),
+          m('p', 'Email'),
+          m(ValidatedInput, { field: model.email }),
+          m('button[type=submit]', 'Validate')
+        )
+      );
+    }
+  };
 }
 
 

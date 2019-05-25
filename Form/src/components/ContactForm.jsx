@@ -6,9 +6,6 @@ const stream = require("mithril/stream")
 
 
 function formModel() {
-  const emailRegex = RegExp(
-    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-  )
   const model = {
     firstName: {
       value: stream(''),
@@ -28,20 +25,26 @@ function formModel() {
             'Expected no more than 3 characters' : '';
       }
     },
+    
     email: {
       value: stream(''),
       error: '',
       validate() {
         model.email.error =
-        emailRegex.email.value("").length < 3 ? 
-        '' : 'Invalid email';
+        emailRegex.test(model) 
+        ? '' : 'Invalid email';
         
       }
       
     }
   };
+  const emailRegex = RegExp(
+    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+  )
   return model;
 }
+
+
 
 function validateAll(model) {
   Object.keys(model).forEach((field) =>

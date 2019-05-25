@@ -5,83 +5,84 @@ const m = require('mithril');
 
 import UIButton from "./ui/UIButton.jsx";
 
+const contactFormHandler = formDOM => {
+  const formData = new FormData(formDOM);
+  const newEntry = {};
 
 
-var contactForm = {
-  firstName: {
-    value: '',
-    error: '',
-    validate() {
-      contactForm.firstName.error =
-        contactForm.firstName.value().length < 3 ?
-          'Expected at least 3 characters' : '';
+  Array.from(formData.entries()).map(entryValue => {
+    const key = entryValue[0];
+    const value = entryValue[1];
+
+    switch (value) {
+      case "false":
+        newEntry[key] = false;
+        break;
+      case "true":
+        newEntry[key] = true;
+        break;
+      default:
+        newEntry[key] = value;
+        break;
     }
-  },
- 
+  });
+  
+  console.log(newEntry);
+
+
+
+};
+
+
+const ContactForm = {
+  firstName:false,
+  lastName:"",
   email: "",
-  message: "",
-
-
-  setLastName: function(value) {
-      this.lastName = value
-  },
-  setEmail: function(value) {
-    this.email = value
-},
-setMessage: function(value) {
-  this.message = value
-},
-  canSubmitIf: function() {
-      return this.firstName !== "" && this.lastName !== ""
-  },
+  message: "", 
  
 
-  view: function() {
+  setFirstName: function(value) {
+    this.firstName = value
+    console.log('it grabs value')
+  },
+  
+  view: (vnode) => {
       return m(".wrapper", 
       m(".form-wrapper",
       [
         m('.stage-title', "Contact Us"),
         m('h4', "Got a question? We'd love to hear from you. Send us a message and we'll respond as soon as possible."),
         m('p', "First Name"),
-          m("input[type=text]", {
-              oninput: function (e) { this.setFirstName(e.target.value) },
-              value: this.firstName,
+          m("input[type=text]",
+          {
+            
+            oninput: (e)=> { this.setFirstName(e.target.value) },
+            value: this.firstName,
           }),
+
 
           m('p', "Last Name"),
           m("input[type=text]", {
-              oninput: function (e) { this.setLastName(e.target.value) },
+            oninput: (e)=> { this.setLastName(e.target.value) },
               value: this.lastName,
           }),
 
           m('p', "Email Address"),
           m("input[type=text]", {
-              oninput: function (e) { this.setEmail(e.target.value) },
+            oninput: (e)=> { this.setEmail(e.target.value) },
               value: this.email,
           }),
           
 
           m('p', "Message"),
           m('textarea.fullWidth', {
-              oninput: function (e) { this.setMessage(e.target.value) },
+            oninput: (e)=> { this.setMessage(e.target.value) },
               value: this.message,
           }),
 
-           
-        onchange: function(event){
-          this.event.firstName = true;
-      }}
-        />
-        {this.event.firstName
-          ? [
-              m('error-message', "*First name must contain at least 3 characters")
-             
-            ]
-          : null}
-
-          <UIButton 
+        < UIButton 
         action={() => contactFormHandler(vnode.dom)} 
-        buttonName="Send Message" />
+        buttonName="Send Message" ></UIButton>
         ]) 
     )
   }
@@ -90,4 +91,4 @@ setMessage: function(value) {
 
 
 
-export default contactForm;
+export default ContactForm;

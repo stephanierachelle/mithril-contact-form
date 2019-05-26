@@ -74,6 +74,19 @@ const ValidatedInput = {
   }
 };
 
+const MessageValidatedInput = {
+  view({ attrs }) {
+    return [
+      m('textarea.fullWidth', {
+        className: attrs.field.error ? 'error' : '',
+        value: attrs.field.value(),
+        oninput: m.withAttr('value', attrs.field.value)
+      }),
+      m('p.errorMessage', attrs.field.error)
+    ];
+  }
+};
+
 
 function ContactForm() {
   const model = formModel();
@@ -94,7 +107,7 @@ function ContactForm() {
           m('p', 'Email'),
           m(ValidatedInput, { field: model.email }),
           m('p', 'Message'),
-          m(ValidatedInput, { field: model.message }),
+          m(MessageValidatedInput, { field: model.message }),
           m('hr'),
           m('button[type=submit]', 'Validate')
         )

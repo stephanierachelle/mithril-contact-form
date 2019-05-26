@@ -1,9 +1,10 @@
 // src/components/ContactForm.jsx
 
 const m = require('mithril');
+
 const stream = require("mithril/stream")
 
-
+const emailRegex = RegExp(/^[a-zA-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
 
 function formModel() {
   const model = {
@@ -15,6 +16,7 @@ function formModel() {
           model.firstName.value().length < 3 ?
             'Expected at least 3 characters' : '';
       }
+      
     },
     lastName: {
       value: stream(''),
@@ -25,23 +27,31 @@ function formModel() {
             'Expected no more than 3 characters' : '';
       }
     },
-    
     email: {
       value: stream(''),
       error: '',
       validate() {
         model.email.error =
-        emailRegex.test(model) 
-        ? '' : 'Invalid email';
+        model.email.value().length < 5 && emailRegex.test(model) ? 
+        'Invalid email' : '';
         
       }
-      
-    }
+    },
+    message: {
+      value: stream(''),
+      error: '',
+      validate() {
+        model.message.error =
+        model.message.value().length < 10 ? 
+        'Message needs to be at Least 10 characters' : '';
+        
+      }
+    },
   };
-  const emailRegex = RegExp(
-    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-  )
+  
+
   return model;
+  
 }
 
 
@@ -64,11 +74,13 @@ const ValidatedInput = {
   }
 };
 
+
 function ContactForm() {
   const model = formModel();
   return {
     view() {
       return (
+       
         m('form', {
           onsubmit(event) {
             event.preventDefault();
@@ -81,8 +93,12 @@ function ContactForm() {
           m(ValidatedInput, { field: model.lastName }),
           m('p', 'Email'),
           m(ValidatedInput, { field: model.email }),
+          m('p', 'Message'),
+          m(ValidatedInput, { field: model.message }),
+          m('hr'),
           m('button[type=submit]', 'Validate')
         )
+  
       );
     }
   };

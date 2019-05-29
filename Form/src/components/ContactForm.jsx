@@ -4,7 +4,13 @@ const m = require('mithril');
 
 const stream = require("mithril/stream")
 
-const emailRegex = RegExp(/^[a-zA-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
+const re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+const contactFormHandler = formDOM => {
+  const formData = new FormData (formDOM);
+  const newEntry = {};
+
+contactForm.reset();
+};
 
 function formModel() {
   const model = {
@@ -32,10 +38,11 @@ function formModel() {
       error: '',
       validate() {
         model.email.error =
-        model.email.value().length < 5 && emailRegex.test(model) ? 
-        'Invalid email' : '';
-        
-      }
+        model.email.value() == '' || !re.test(model.email.value())
+          ? 'Please enter a valid email address': '';
+           return false;
+    }
+    
     },
     message: {
       value: stream(''),
@@ -53,8 +60,6 @@ function formModel() {
   return model;
   
 }
-
-
 
 function validateAll(model) {
   Object.keys(model).forEach((field) =>
@@ -77,7 +82,7 @@ const ValidatedInput = {
 const MessageValidatedInput = {
   view({ attrs }) {
     return [
-      m('textarea.fullWidth', {
+      m('textarea[type=text]', {
         className: attrs.field.error ? 'error' : '',
         value: attrs.field.value(),
         oninput: m.withAttr('value', attrs.field.value)
@@ -87,19 +92,22 @@ const MessageValidatedInput = {
   }
 };
 
-
 function ContactForm() {
   const model = formModel();
   return {
     view() {
       return (
-       
-        m('form', {
+        m("form", {
           onsubmit(event) {
             event.preventDefault();
             validateAll(model);
+            console.log('saved....')
           }
         },
+        
+      
+        m('.stage-title', "Contact Us"),
+        m('h4', "Have a question? We'd love to hear from you. Send us a message and we'll respond as soon as possible."),
           m('p', 'First Name'),
           m(ValidatedInput, { field: model.firstName }),
           m('p', 'Last Name'),
@@ -107,15 +115,14 @@ function ContactForm() {
           m('p', 'Email'),
           m(ValidatedInput, { field: model.email }),
           m('p', 'Message'),
-          m(MessageValidatedInput, { field: model.message }),
-          m('hr'),
+          m(ValidatedInput, { field: model.message }),
           m('button[type=submit]', 'Validate')
-        )
-  
-      );
+          )
+      )
     }
   };
 }
+
 
 
 

@@ -2,16 +2,13 @@
 
 const m = require("mithril");
 
-
-
 import MainStage from "./MainStage.jsx";
-
-// Components
 import MainContainer from "../../components/layout/MainContainer.jsx";
-
 //form submition
 import ContactForm from "../../components/ContactForm.jsx";
 import NavButton from "../ui/NavButton.jsx";
+
+const state = {};
 
 const WelcomeView = () => [
   <h1 class="app-title">Capitalviz</h1>,
@@ -32,6 +29,18 @@ const FormView = () => [
  
 ];
 
+const SubmittedView = () => [
+  <h2 class="app-greeting">Thank you for your Enquiry we will be in touch shortly.</h2>,
+  
+  <NavButton  
+  action={() => console.log(`return to home page!`)}
+  buttonName="RETURN HOME"
+  />,
+  
+  ];
+
+
+
 
 
 const App = {
@@ -44,7 +53,10 @@ const App = {
         },
         "/contact": {
         view: () => FormView()
-        }
+        },
+        "/users": {
+          view: () => SubmittedView()
+          }
       });
     },
 
@@ -54,5 +66,6 @@ const App = {
     </div>
   )
 };
+
 
 export default App;

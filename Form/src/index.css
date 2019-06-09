@@ -124,7 +124,7 @@ input[type="text"] {
     border: 1px solid #cfcfcf;
 }
 
-textarea[type="text"] {
+textarea.fullWidth {
     padding: 10px 10px 50px 10px;
     border-radius: 5px;
     outline: none;

@@ -1,16 +1,38 @@
+import UIButton from "./ui/UIButton.jsx";
+
 // src/components/ContactForm.jsx
 
 const m = require('mithril');
-
 const stream = require("mithril/stream")
 
+
 const re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+
+
 const contactFormHandler = formDOM => {
-  const formData = new FormData (formDOM);
+  const formData = new FormData(formDOM);
   const newEntry = {};
 
-contactForm.reset();
+  Array.from(formData.entries()).map(entryValue => {
+    const key = entryValue[0];
+    const value = entryValue[1];
+
+    switch (value) {
+      case "false":
+        newEntry[key] = false;
+        break;
+      case "true":
+        newEntry[key] = true;
+        break;
+      default:
+        newEntry[key] = value;
+        break;
+    }
+  });
+
 };
+
+
 
 function formModel() {
   const model = {
@@ -66,6 +88,14 @@ function validateAll(model) {
     model[field].validate());
 }
 
+const Example = {
+  view: function (vnode) {
+      return m("div", "Hello, " + vnode.attrs.field)
+  }
+}
+  
+
+
 const ValidatedInput = {
   view({ attrs }) {
     return [
@@ -82,7 +112,7 @@ const ValidatedInput = {
 const MessageValidatedInput = {
   view({ attrs }) {
     return [
-      m('textarea[type=text]', {
+      m('textarea.fullWidth', {
         className: attrs.field.error ? 'error' : '',
         value: attrs.field.value(),
         oninput: m.withAttr('value', attrs.field.value)
@@ -101,7 +131,12 @@ function ContactForm() {
           onsubmit(event) {
             event.preventDefault();
             validateAll(model);
-            console.log('saved....')
+            //is it working?
+            contactFormHandler(model.dom);
+            console.log('Validating...')
+            // place data in an array
+            
+            //send to server
           }
         },
         
@@ -115,8 +150,12 @@ function ContactForm() {
           m('p', 'Email'),
           m(ValidatedInput, { field: model.email }),
           m('p', 'Message'),
-          m(ValidatedInput, { field: model.message }),
-          m('button[type=submit]', 'Validate')
+          m(MessageValidatedInput, { field: model.message }),
+          m('button[type=submit]', {
+            onclick: function() { m.route.set('/users')}
+          }, 'send'),
+         
+
           )
       )
     }

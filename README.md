@@ -40,14 +40,19 @@ Our current biggest issue is sending the data using the postgREST npm.
 We have the validation working. This is written using Mithril to structure views and route.
 
 <strong>A run through of the functionality if this form:</strong>
-This form is written based off this tutorial: <href/>
+This form is written based off this tutorial: <href> https://auth0.com/blog/build-robust-apps-with-mithril-and-auth0/</href>
 This form is written using m() objects in two views. One view is holds the vaidation and the second view holds what is seen on the browser.
 Validation is working. The form is completed until here.
-The next steps that need to be solved are:
 
-On send at line(form onSubmit) - need to send data via an async method : POST so that we can post to the server.
-PostgREST needs to receive this data as a JSON and send back an email as a response to the client of Form submitted. 
+<strong>The next steps that need to be solved are:</strong>
+
+<li>On send at line(form onSubmit) - need to send data via an async method : POST so that we can post to the server.
+  </li>
+<li>PostgREST needs to receive this data as a JSON and send back an email as a response to the client of Form submitted. 
+  </li>
+<li>
 The data needs to go from the API through to subzero and Open Resty will send a response email also. 
+</li>
 
 Once the form is working...
 <li>Route the form page into the existing website. </li>

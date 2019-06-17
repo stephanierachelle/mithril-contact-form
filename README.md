@@ -15,7 +15,7 @@ npm run start
 npm run build
 
 <h1>Overall Goal:</h1>
-<li> This form needs to be written and fully functional in mithril.</li>
+<li> This form needs to be written and fully functional in <a href="https://mithril.js.org/index.html">Mithril</a></li>
 <li> Validation function works: We need to add in that if all fields are true to submit the {data} JSON object.</li>
 <li>If a validation error does occur the form cannot submit</li>
 

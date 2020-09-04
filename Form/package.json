@@ -22,7 +22,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "express": "^4.17.0",
-    "mithril": "^1.1.6",
+    "mithril": "^1.1.7",
     "validate.js": "^0.12.0"
   },
   "scripts": {
